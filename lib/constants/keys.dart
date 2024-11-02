@@ -1,6 +1,8 @@
 part of 'constants.dart';
 
 class Keys {
+  //Config
+  static const String appName = 'Dijinx Todo';
   //Database
   static const String dbName = 'dijinx_todo_database.db';
 

@@ -1,6 +1,6 @@
 part of 'theme.dart';
 
-class DijinxAppThemes {
+class AppThemes {
   static final DarkColors _darkColors = DarkColors();
   static final LightColors _lightColors = LightColors();
 

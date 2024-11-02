@@ -16,7 +16,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       : super(AppInitial(
           AppTheme.light,
           LightColors(),
-          DijinxAppThemes.lightTheme,
+          AppThemes.lightTheme,
           '',
         )) {
     on<AppEvent>((event, emit) async {
@@ -46,9 +46,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   ThemeData _getThemeData(AppTheme theme) {
-    return theme == AppTheme.dark
-        ? DijinxAppThemes.darkTheme
-        : DijinxAppThemes.lightTheme;
+    return theme == AppTheme.dark ? AppThemes.darkTheme : AppThemes.lightTheme;
   }
 
   AppThemeColors _getThemeColors(AppTheme theme) {

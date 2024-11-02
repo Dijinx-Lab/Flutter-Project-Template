@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       }, builder: (builderContext, state) {
         if (state is AppReady) {
           return MaterialApp(
-              title: 'Dijinx',
+              title: Keys.appName,
               debugShowCheckedModeBanner: false,
               theme: state.themeData,
               localizationsDelegates: context.localizationDelegates,

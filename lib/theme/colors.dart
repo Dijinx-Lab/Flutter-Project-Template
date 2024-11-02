@@ -61,49 +61,28 @@ abstract class AppThemeColors {
 
   // Buttons
   Color get primaryButton => primaryColor;
-  Color get primaryButtonText => Colors.white;
+  Color get primaryButtonWater => onPrimary.withOpacity(0.3);
+  Color get primaryButtonText => onPrimary;
   Color get primaryButtonBorder => primaryButton;
-  Color get primaryButtonDisabled => StaticColors.sky300;
-  Color get primaryButtonTextDisabled => primaryButtonText;
-  Color get primaryButtonDisabledBorder => primaryButtonDisabled;
-  Color get primaryButtonLoader => Colors.white;
-  Color get primaryButtonLoadingBackground => StaticColors.sky300;
-  Color get primaryButtonLoadingBorder => primaryButtonLoadingBackground;
+  Color get primaryButtonLoader => primaryButtonText;
 
-  Color get secondaryButton => Colors.white70;
-  Color get secondaryButtonText => Colors.black;
-  Color get secondaryButtonBorder => secondaryButton;
-  Color get secondaryButtonDisabled => StaticColors.sky300;
-  Color get secondaryButtonTextDisabled => primaryButtonText;
-  Color get secondaryButtonDisabledBorder => secondaryButtonDisabled;
-  Color get secondaryButtonLoader => Colors.white;
-  Color get secondaryButtonLoadingBackground => StaticColors.sky300;
-  Color get secondaryButtonLoadingBorder => secondaryButtonLoadingBackground;
+  Color get secondaryButton => surfacePrimary;
+  Color get secondaryButtonWater => textSecondary.withOpacity(0.3);
+  Color get secondaryButtonText => textSecondary;
+  Color get secondaryButtonBorder => textSecondary;
+  Color get secondaryButtonLoader => textSecondary;
 
   Color get dangerButton => StaticColors.strawberry500;
-  Color get dangerButtonText => primaryButtonText;
+  Color get dangerButtonWater => onPrimary.withOpacity(0.3);
+  Color get dangerButtonText => onPrimary;
   Color get dangerButtonBorder => dangerButton;
-  Color get dangerButtonDisabled => StaticColors.strawberry500.withOpacity(0.5);
-  Color get dangerButtonTextDisabled => primaryButtonText.withOpacity(0.5);
-  Color get dangerButtonDisabledBorder => dangerButtonDisabled;
+  Color get dangerButtonLoader => onPrimary;
 
-  Color get surfaceButton => surfacePrimary;
-  Color get surfaceButtonText => textPrimary;
-  Color get surfaceButtonBorder => borderPrimary;
-  Color get surfaceButtonDisabled => surfaceButton.withOpacity(0.5);
-  Color get surfaceButtonTextDisabled => surfaceButtonText.withOpacity(0.5);
-  Color get surfaceButtonDisabledBorder => surfaceButtonBorder.withOpacity(0.5);
-
-  Color get secondaryDangerButton => Colors.white70;
-  Color get secondaryDangerButtonText => StaticColors.strawberry700;
-  Color get secondaryDangerButtonBorder => secondaryButton;
-  Color get secondaryDangerButtonDisabled => StaticColors.sky300;
-  Color get secondaryDangerButtonTextDisabled => primaryButtonText;
-  Color get secondaryDangerButtonDisabledBorder => secondaryButtonDisabled;
-  Color get secondaryDangerButtonLoader => StaticColors.strawberry700;
-  Color get secondaryDangerButtonLoadingBackground => StaticColors.sky300;
-  Color get secondaryDangerButtonLoadingBorder =>
-      secondaryButtonLoadingBackground;
+  Color get textButton => Colors.transparent;
+  Color get textButtonWater => textPrimary.withOpacity(0.3);
+  Color get textButtonText => textPrimary;
+  Color get textButtonBorder => Colors.transparent;
+  Color get textButtonLoader => textPrimary;
 
   // Switches
   Color get switchBackgroundOn => primaryColor;

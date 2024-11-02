@@ -11,4 +11,5 @@ class Languages {
   static const String defaultLocale = 'en';
 
   static const Locale fallback = Locale(defaultLocale);
+  
 }

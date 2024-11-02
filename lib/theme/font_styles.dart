@@ -1,91 +1,42 @@
-// part of 'theme.dart';
+part of 'theme.dart';
 
-// class Styles {
-//   /* TEXT STYLES */
-//   static TextStyle title({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeLarge,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
+class FontStyles {
+  static TextStyle style(FontSizes size, {Color? textColor}) {
+    var sizes = _getFontSize(size);
+    return TextStyle(
+      fontSize: sizes.$1,
+      fontWeight: sizes.$2,
+      color: textColor,
+    );
+  }
 
-//   static TextStyle titleBold({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeLarge,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-
-//   static TextStyle mediumTitle({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeMedium,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-
-//   static TextStyle navbarTitle({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeMedium,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-
-//   static TextStyle regular({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeRegular,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
-//   static TextStyle regularBold({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeRegular,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-
-//   static TextStyle regularItalic({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeRegular,
-//         fontWeight: FontWeight.w400,
-//         fontStyle: FontStyle.italic,
-//         color: textColor,
-//       );
-
-//   static TextStyle subtext({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeSmall,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
-//   static TextStyle subtextBold({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeSmall,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-
-//   static TextStyle smallNote({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeExtraSmall,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
-//   static TextStyle inputRegular({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.inputFontSize,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
-//   static TextStyle inputError({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.inputErrorFontSize,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
-//   static TextStyle buttonText({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeSmall,
-//         fontWeight: FontWeight.w600,
-//         color: textColor,
-//       );
-//   static TextStyle linkText({Color? textColor}) => TextStyle(
-//         fontSize: Sizes.fontSizeSmall,
-//         fontWeight: FontWeight.w400,
-//         color: textColor,
-//       );
-
+  static (double, FontWeight) _getFontSize(FontSizes size) {
+    switch (size) {
+      case FontSizes.title:
+        return (Sizes.fontSizeXXL, FontWeight.w400);
+      case FontSizes.titleBold:
+        return (Sizes.fontSizeXXL, FontWeight.w600);
+      case FontSizes.heading:
+        return (Sizes.fontSizeXL, FontWeight.w400);
+      case FontSizes.headingBold:
+        return (Sizes.fontSizeXL, FontWeight.w600);
+      case FontSizes.bodyLarge:
+        return (Sizes.fontSizeL, FontWeight.w400);
+      case FontSizes.bodyLargeBold:
+        return (Sizes.fontSizeL, FontWeight.w600);
+      case FontSizes.body:
+        return (Sizes.fontSizeM, FontWeight.w400);
+      case FontSizes.bodyBold:
+        return (Sizes.fontSizeM, FontWeight.w600);
+      case FontSizes.label:
+        return (Sizes.fontSizeS, FontWeight.w400);
+      case FontSizes.labelBold:
+        return (Sizes.fontSizeS, FontWeight.w600);
+      default:
+        throw ("Invalid type");
+    }
+  }
+}
 //   /* INPUT DECORATIONS */
 //   static InputDecoration inputDecoration({
 //     required AlbiInputType type,

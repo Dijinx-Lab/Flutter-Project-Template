@@ -33,15 +33,15 @@ class LightColors extends AppThemeColors {
   @override
   Color get surfacePrimary => const Color(0xFFFFFFFF);
   @override
-  Color get background => const Color(0xFFE9EFFD);
+  Color get background => Colors.white;
   @override
   Color get surfaceSecondary => const Color(0xFFE9EFFD);
   @override
   Color get surfaceInteractive => Colors.white;
   @override
-  Color get shimmerHighlight => const Color(0x80565E64);
+  Color get shimmerHighlight => StaticColors.slate300;
   @override
-  Color get shimmerBase => const Color(0x806C757D);
+  Color get shimmerBase => StaticColors.slate200;
 
   // Overlays
   @override

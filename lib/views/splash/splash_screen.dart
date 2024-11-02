@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_template/constants/assets.dart';
-import 'package:mobile_template/constants/sizes.dart';
+import 'package:mobile_template/constants/constants.dart';
 import 'package:mobile_template/theme/theme.dart';
 
 class SplashScreen extends StatelessWidget {

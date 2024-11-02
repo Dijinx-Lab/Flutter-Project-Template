@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_template/constants/enums.dart';
+import 'package:mobile_template/constants/constants.dart';
 import 'package:mobile_template/models/models.dart';
 import 'package:mobile_template/repositories/repositories.dart';
 import 'package:mobile_template/theme/theme.dart';

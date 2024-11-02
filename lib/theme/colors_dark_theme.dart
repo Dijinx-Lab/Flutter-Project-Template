@@ -39,9 +39,9 @@ class DarkColors extends AppThemeColors {
   @override
   Color get surfaceInteractive => surfacePrimary;
   @override
-  Color get shimmerHighlight => const Color(0x80565E64);
+  Color get shimmerHighlight => StaticColors.slate800;
   @override
-  Color get shimmerBase => const Color(0x806C757D);
+  Color get shimmerBase => StaticColors.slate700;
 
   // Overlays
   @override

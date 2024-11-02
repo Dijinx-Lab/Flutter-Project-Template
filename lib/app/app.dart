@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:mobile_template/app/bloc/app_bloc.dart';
 import 'package:mobile_template/constants/constants.dart';
 import 'package:mobile_template/views/splash/splash_screen.dart';
+import 'package:mobile_template/views/test/widget_test_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -27,6 +29,8 @@ class App extends StatelessWidget {
               theme: state.themeData,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
+              navigatorObservers: [FlutterSmartDialog.observer],
+              builder: FlutterSmartDialog.init(),
               locale: state.locale.isEmpty
                   ? Languages.fallback
                   : Locale(state.locale),
@@ -41,6 +45,7 @@ class App extends StatelessWidget {
   }
 
   _getStartPage(AppState state) {
-    return SplashScreen();
+    return WidgetTestScreen();
+    // return AuthScreen();
   }
 }

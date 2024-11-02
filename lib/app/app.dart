@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:mobile_template/app/bloc/app_bloc.dart';
-import 'package:mobile_template/constants/constants.dart';
-import 'package:mobile_template/views/splash/splash_screen.dart';
-import 'package:mobile_template/views/test/widget_test_screen.dart';
+import 'package:flutter_essentials/app/bloc/app_bloc.dart';
+import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/views/splash/splash_screen.dart';
+import 'package:flutter_essentials/views/test/widget_test_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -45,7 +45,7 @@ class App extends StatelessWidget {
   }
 
   _getStartPage(AppState state) {
-    return WidgetTestScreen();
+    return const WidgetTestScreen();
     // return AuthScreen();
   }
 }

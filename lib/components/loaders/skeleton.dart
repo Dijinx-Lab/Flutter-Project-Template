@@ -1,6 +1,6 @@
 part of 'loaders.dart';
 
-class SkeletonLoader {
+class EssentialSkeleton {
   static Widget circle({
     required double radius,
     margin = EdgeInsets.zero,

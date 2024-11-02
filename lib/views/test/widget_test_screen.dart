@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_template/app/bloc/app_bloc.dart';
-import 'package:mobile_template/components/buttons/buttons.dart';
-import 'package:mobile_template/components/loaders/loaders.dart';
-import 'package:mobile_template/components/selections/selections.dart';
-import 'package:mobile_template/components/spacings/spacing.dart';
-import 'package:mobile_template/constants/constants.dart';
-import 'package:mobile_template/theme/theme.dart';
+import 'package:flutter_essentials/app/bloc/app_bloc.dart';
+import 'package:flutter_essentials/components/buttons/buttons.dart';
+import 'package:flutter_essentials/components/loaders/loaders.dart';
+import 'package:flutter_essentials/components/selections/selections.dart';
+import 'package:flutter_essentials/components/spacings/spacing.dart';
+import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/theme/theme.dart';
+import 'package:flutter_essentials/views/test/cubit/widget_test_cubit.dart';
 
 class WidgetTestScreen extends StatelessWidget {
   const WidgetTestScreen({super.key});
@@ -14,35 +15,102 @@ class WidgetTestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
-      builder: (context, appState) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: Paddings.getHorizontalInsets(context),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Spacing(Spacings.pageTop),
-                    _buildTheme(appState, context),
-                    const Spacing(Spacings.medium),
-                    _buildTexts(appState),
-                    const Spacing(Spacings.medium),
-                    _buildButtons(appState),
-                    const Spacing(Spacings.medium),
-                    _buildLoaders(appState),
-                    const Spacing(Spacings.medium),
-                    const Spacing(Spacings.xxLarge),
-                    const Spacing(Spacings.xxLarge),
-                    const Spacing(Spacings.xxLarge),
-                    const Spacing(Spacings.xxLarge),
-                  ],
+      builder: (appContext, appState) {
+        return BlocProvider(
+          create: (context) => WidgetTestCubit(),
+          child: Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding: Paddings.getHorizontalInsets(appContext),
+                child: SingleChildScrollView(
+                  child: BlocConsumer<WidgetTestCubit, WidgetTestState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      WidgetTestCubit cubit = context.read<WidgetTestCubit>();
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Spacing(Spacings.pageTop),
+                          _buildTheme(appState, context),
+                          const Spacing(Spacings.medium),
+                          _buildTexts(appState),
+                          const Spacing(Spacings.medium),
+                          _buildButtons(appState),
+                          const Spacing(Spacings.medium),
+                          _buildLoaders(appState),
+                          const Spacing(Spacings.medium),
+                          _buildSelections(appState, cubit),
+                          const Spacing(Spacings.xxLarge),
+                          const Spacing(Spacings.xxLarge),
+                          const Spacing(Spacings.xxLarge),
+                          const Spacing(Spacings.xxLarge),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  _buildSelections(AppState appState, WidgetTestCubit cubit) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Selections',
+          style: FontStyles.style(
+            FontSizes.titleBold,
+            textColor: appState.colors.primaryColor,
+          ),
+        ),
+        const Spacing(Spacings.medium),
+        EssentialSwitch(
+          label: 'Adaptive Switch',
+          value: cubit.state.props[0] as bool,
+          onChange: (res) => cubit.updateSwitch(res),
+        ),
+        const Spacing(Spacings.medium),
+        EssentialCheckbox(
+          label: 'Adaptive Checkbox',
+          value: cubit.state.props[1] as bool,
+          onChange: (res) => cubit.updateCheckbox(res),
+        ),
+        const Spacing(Spacings.medium),
+        Row(
+          children: [
+            EssentialRadio<String>(
+              groupValue: cubit.state.props[2] as String,
+              value: 'Yes',
+              onChange: (res) => cubit.updateRadio(res),
+            ),
+            const Spacing(Spacings.medium),
+            EssentialRadio<String>(
+              groupValue: cubit.state.props[2] as String,
+              value: 'No',
+              onChange: (res) => cubit.updateRadio(res),
+            ),
+            const Spacing(Spacings.medium),
+            EssentialRadio<String>(
+              groupValue: cubit.state.props[2] as String,
+              value: 'Maybe',
+              onChange: (res) => cubit.updateRadio(res),
+            ),
+          ],
+        ),
+        const Spacing(Spacings.large),
+        EssentialSlider(
+          value: cubit.state.props[3] as double,
+          min: 0,
+          max: 10,
+          label: 'Adaptive Slider',
+          onChanged: (res) => cubit.updateSlider(res),
+        )
+      ],
     );
   }
 
@@ -57,51 +125,53 @@ class WidgetTestScreen extends StatelessWidget {
             textColor: appState.colors.primaryColor,
           ),
         ),
-        // const Spacing(Spacings.medium),
-        // const SizedBox(
-        //     width: Sizes.spacingXXL,
-        //     height: Sizes.spacingXXL,
-        //     child: AdaptiveLoader()),
-        // const Spacing(Spacings.medium),
-        // const SizedBox(
-        //     width: double.maxFinite,
-        //     height: Sizes.spacingXXL,
-        //     child: LineLoader()),
-        // const Spacing(Spacings.medium),
-        // Row(
-        //   children: [
-        //     Button(
-        //       label: 'Circular Overlay',
-        //       onTap: () async {
-        //         OverlayLoader.showLoader();
-        //         await Future.delayed(const Duration(seconds: 3));
-        //         OverlayLoader.dismiss();
-        //       },
-        //       isExpanded: false,
-        //     ),
-        //     const Spacing(Spacings.medium),
-        //     Button(
-        //       label: 'Line Overlay',
-        //       onTap: () async {
-        //         OverlayLoader.showLoader(loaderType: OverlayLoaderTypes.line);
-        //         await Future.delayed(const Duration(seconds: 3));
-        //         OverlayLoader.dismiss();
-        //       },
-        //       isExpanded: false,
-        //     ),
-        //   ],
-        // ),
         const Spacing(Spacings.medium),
         Row(
           children: [
-            SkeletonLoader.circle(radius: 30),
-            SkeletonLoader.text(margin: EdgeInsets.only(left: Sizes.spacingM)),
+            EssentialSkeleton.circle(radius: 30),
+            EssentialSkeleton.text(
+                margin: const EdgeInsets.only(left: Sizes.spacingM)),
           ],
         ),
-        SkeletonLoader.rect(
+        EssentialSkeleton.rect(
             width: double.maxFinite,
             height: 100,
-            margin: EdgeInsets.only(top: Sizes.spacingM)),
+            margin: const EdgeInsets.only(top: Sizes.spacingM)),
+        const Spacing(Spacings.medium),
+        const SizedBox(
+            width: Sizes.spacingXXL,
+            height: Sizes.spacingXXL,
+            child: EssentialSpinner()),
+        const Spacing(Spacings.medium),
+        const SizedBox(
+            width: double.maxFinite,
+            height: Sizes.spacingXXL,
+            child: EssentialLineLoader()),
+        const Spacing(Spacings.medium),
+        Row(
+          children: [
+            EssentialButton(
+              label: 'Circular Overlay',
+              onTap: () async {
+                EssentialOverlayLoader.showLoader();
+                await Future.delayed(const Duration(seconds: 3));
+                EssentialOverlayLoader.dismiss();
+              },
+              isExpanded: false,
+            ),
+            const Spacing(Spacings.medium),
+            EssentialButton(
+              label: 'Line Overlay',
+              onTap: () async {
+                EssentialOverlayLoader.showLoader(
+                    loaderType: OverlayLoaderTypes.line);
+                await Future.delayed(const Duration(seconds: 3));
+                EssentialOverlayLoader.dismiss();
+              },
+              isExpanded: false,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -118,24 +188,14 @@ class WidgetTestScreen extends StatelessWidget {
           ),
         ),
         const Spacing(Spacings.medium),
-        Row(
-          children: [
-            Text(
-              'Dark Mode',
-              style: FontStyles.style(
-                FontSizes.body,
-              ),
-            ),
-            const Spacing(Spacings.medium),
-            AppSwitch(
-              value: appState.themeData.brightness == Brightness.dark,
-              onChange: (res) {
-                context
-                    .read<AppBloc>()
-                    .setTheme(res ? AppTheme.dark : AppTheme.light);
-              },
-            )
-          ],
+        EssentialSwitch(
+          label: 'Dark Mode',
+          value: appState.themeData.brightness == Brightness.dark,
+          onChange: (res) {
+            context
+                .read<AppBloc>()
+                .setTheme(res ? AppTheme.dark : AppTheme.light);
+          },
         ),
       ],
     );
@@ -153,42 +213,42 @@ class WidgetTestScreen extends StatelessWidget {
           ),
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Primary Button',
           onTap: () => (),
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Disabled Primary Button',
           onTap: () => (),
           isEnabled: false,
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Expanded = false',
           onTap: () => (),
           isExpanded: false,
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Primary Button',
           onTap: () => (),
           isLoading: true,
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Secondary Button',
           onTap: () => (),
           type: ButtonTypes.secondary,
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Danger Button',
           onTap: () => (),
           type: ButtonTypes.danger,
         ),
         const Spacing(Spacings.medium),
-        Button(
+        EssentialButton(
           label: 'Text Only',
           onTap: () => (),
           type: ButtonTypes.textOnly,

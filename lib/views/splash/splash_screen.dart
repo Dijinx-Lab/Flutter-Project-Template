@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_template/constants/constants.dart';
-import 'package:mobile_template/theme/theme.dart';
+import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/theme/theme.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

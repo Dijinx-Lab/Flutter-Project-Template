@@ -1,6 +1,6 @@
-import 'package:mobile_template/constants/constants.dart';
-import 'package:mobile_template/models/models.dart';
-import 'package:mobile_template/utils/utils.dart';
+import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/models/models.dart';
+import 'package:flutter_essentials/utils/utils.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

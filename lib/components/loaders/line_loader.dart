@@ -1,8 +1,8 @@
 part of 'loaders.dart';
 
-class LineLoader extends StatelessWidget {
+class EssentialLineLoader extends StatelessWidget {
   final Color? color;
-  const LineLoader({super.key, this.color});
+  const EssentialLineLoader({super.key, this.color});
 
   @override
   Widget build(BuildContext context) {

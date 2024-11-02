@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_template/app/app.dart';
-import 'package:mobile_template/constants/constants.dart';
-import 'package:mobile_template/utils/utils.dart';
+import 'package:flutter_essentials/app/app.dart';
+import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +10,8 @@ void main() async {
   await TimeZoneUtil.initialize();
   await SharedPrefUtil().initialize();
   await LocalDbUtil.initialize();
+
+  EasyLocalization.logger.enableBuildModes = [];
 
   runApp(
     EasyLocalization(

@@ -1,8 +1,8 @@
 part of 'loaders.dart';
 
-class AdaptiveLoader extends StatelessWidget {
+class EssentialSpinner extends StatelessWidget {
   final Color? color;
-  const AdaptiveLoader({super.key, this.color});
+  const EssentialSpinner({super.key, this.color});
 
   @override
   Widget build(BuildContext context) {

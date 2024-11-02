@@ -1,6 +1,6 @@
 part of 'loaders.dart';
 
-class OverlayLoader {
+class EssentialOverlayLoader {
   static showLoader({
     OverlayLoaderTypes loaderType = OverlayLoaderTypes.circular,
     Color? color,
@@ -60,13 +60,13 @@ class _OverlayLoaderWidgetState extends State<OverlayLoaderWidget>
     return Stack(children: [
       Visibility(
         visible: widget.loaderType == OverlayLoaderTypes.circular,
-        child: AdaptiveLoader(
+        child: EssentialSpinner(
           color: widget.color,
         ),
       ),
       Visibility(
         visible: widget.loaderType == OverlayLoaderTypes.line,
-        child: LineLoader(
+        child: EssentialLineLoader(
           color: widget.color,
         ),
       ),

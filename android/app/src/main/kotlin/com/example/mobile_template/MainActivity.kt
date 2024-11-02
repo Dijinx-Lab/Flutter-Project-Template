@@ -1,4 +1,4 @@
-package com.example.mobile_template
+package com.dijinx.flutter_essentials
 
 import io.flutter.embedding.android.FlutterActivity
 

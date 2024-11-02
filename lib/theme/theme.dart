@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_template/constants/constants.dart';
+import 'package:flutter_essentials/constants/constants.dart';
 
 part 'app_themes.dart';
 part 'colors.dart';

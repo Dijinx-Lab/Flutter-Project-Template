@@ -1,14 +1,15 @@
 part of 'buttons.dart';
 
-class Button extends StatelessWidget {
+class EssentialButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   final ButtonTypes type;
   final bool isLoading;
   final bool isExpanded;
   final bool isEnabled;
+  final Haptics? haptic;
 
-  const Button({
+  const EssentialButton({
     super.key,
     required this.label,
     required this.onTap,
@@ -16,6 +17,7 @@ class Button extends StatelessWidget {
     this.isLoading = false,
     this.isExpanded = true,
     this.isEnabled = true,
+    this.haptic = Haptics.selection,
   });
 
   @override
@@ -35,13 +37,19 @@ class Button extends StatelessWidget {
                     },
                     padding: _getPadding(),
                     color: _getCupertinoBackgroundColor(state),
+                    pressedOpacity: 0.7,
                     borderRadius:
                         BorderRadius.circular(Sizes.buttonBorderRadius),
                     child: _buildChild(state),
                   )
                 : ElevatedButton(
                     onPressed: () {
-                      if (!isLoading && !isLoading) onTap();
+                      if (!isLoading && !isLoading) {
+                        if (haptic != null) {
+                          HapticUtil.trigger(haptic!);
+                        }
+                        onTap();
+                      }
                     },
                     style: _getButtonStyle(state),
                     child: _buildChild(state),
@@ -56,7 +64,7 @@ class Button extends StatelessWidget {
     return FittedBox(
       fit: BoxFit.fitWidth,
       child: isLoading
-          ? AdaptiveLoader(
+          ? EssentialSpinner(
               color: _getTextColor(state).withOpacity(isEnabled ? 1 : 0.8),
             )
           : Text(
@@ -65,7 +73,7 @@ class Button extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: FontStyles.style(
-                FontSizes.body,
+                FontSizes.bodyBold,
                 textColor:
                     _getTextColor(state).withOpacity(isEnabled ? 1 : 0.8),
               ),

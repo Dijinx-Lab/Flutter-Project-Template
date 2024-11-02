@@ -1,4 +1,4 @@
-# mobile_template
+# flutter_essentials
 
 A new Flutter project.
 

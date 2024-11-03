@@ -9,3 +9,4 @@ part 'colors_dark_theme.dart';
 part 'colors_light_theme.dart';
 part 'paddings.dart';
 part 'font_styles.dart';
+part 'shadows.dart';

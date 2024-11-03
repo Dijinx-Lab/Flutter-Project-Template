@@ -1,4 +1,4 @@
-part of 'selections.dart';
+part of '../components.dart';
 
 class EssentialSlider extends StatelessWidget {
   final double value;

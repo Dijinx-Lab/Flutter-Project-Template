@@ -17,6 +17,8 @@ class Sizes {
   static const double buttonHorizontalPaddingS = 6;
   static const double buttonHorizontalPaddingL = 16;
   static const double buttonElevation = 4;
+  static const double iconButtonSize = 34;
+  static const double iconButtonBorderRadius = 200;
 
   //Font
   static const double fontSizeXXL = 24.0; //title

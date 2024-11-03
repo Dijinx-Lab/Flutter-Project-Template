@@ -33,7 +33,7 @@ class FontStyles {
       case FontSizes.labelBold:
         return (Sizes.fontSizeS, FontWeight.w600);
       default:
-        throw ("Invalid type");
+        throw ("Invalid or unhandled type");
     }
   }
 }

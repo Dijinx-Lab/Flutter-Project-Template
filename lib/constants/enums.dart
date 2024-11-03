@@ -40,3 +40,13 @@ enum FontSizes {
   label,
   labelBold,
 }
+
+enum ComponentStyles {
+  adaptive,
+  material,
+  cupertino,
+}
+
+enum ShadowStyles {
+  card,
+}

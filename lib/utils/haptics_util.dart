@@ -19,7 +19,7 @@ class HapticUtil {
         await _error();
         break;
       default:
-        throw Exception("Invalid type");
+        throw Exception("Invalid or unhandled type");
     }
   }
 

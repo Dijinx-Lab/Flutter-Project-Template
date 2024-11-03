@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'widget_test_state.dart';
+part 'widget_display_state.dart';
 
-class WidgetTestCubit extends Cubit<WidgetTestState> {
-  WidgetTestCubit()
-      : super(const WidgetTestLoaded(
+class WidgetDisplayCubit extends Cubit<WidgetDisplayState> {
+  WidgetDisplayCubit()
+      : super(const WidgetDisplayLoaded(
           isSwitchOn: false,
           isCheckboxOn: false,
           radioGroupValue: "",
@@ -14,7 +14,7 @@ class WidgetTestCubit extends Cubit<WidgetTestState> {
 
   updateSwitch(bool val) {
     emit(
-      WidgetTestLoaded(
+      WidgetDisplayLoaded(
         isSwitchOn: val,
         isCheckboxOn: state.props[1] as bool,
         radioGroupValue: state.props[2] as String,
@@ -25,7 +25,7 @@ class WidgetTestCubit extends Cubit<WidgetTestState> {
 
   updateCheckbox(bool val) {
     emit(
-      WidgetTestLoaded(
+      WidgetDisplayLoaded(
         isSwitchOn: state.props[0] as bool,
         isCheckboxOn: val,
         radioGroupValue: state.props[2] as String,
@@ -36,7 +36,7 @@ class WidgetTestCubit extends Cubit<WidgetTestState> {
 
   updateRadio(String val) {
     emit(
-      WidgetTestLoaded(
+      WidgetDisplayLoaded(
         isSwitchOn: state.props[0] as bool,
         isCheckboxOn: state.props[1] as bool,
         radioGroupValue: val,
@@ -47,7 +47,7 @@ class WidgetTestCubit extends Cubit<WidgetTestState> {
 
   updateSlider(double val) {
     emit(
-      WidgetTestLoaded(
+      WidgetDisplayLoaded(
         isSwitchOn: state.props[0] as bool,
         isCheckboxOn: state.props[1] as bool,
         radioGroupValue: state.props[2] as String,

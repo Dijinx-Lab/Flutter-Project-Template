@@ -5,7 +5,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_essentials/app/bloc/app_bloc.dart';
 import 'package:flutter_essentials/constants/constants.dart';
 import 'package:flutter_essentials/views/splash/splash_screen.dart';
-import 'package:flutter_essentials/views/test/widget_test_screen.dart';
+import 'package:flutter_essentials/views/test/widget_display_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -45,7 +45,7 @@ class App extends StatelessWidget {
   }
 
   _getStartPage(AppState state) {
-    return const WidgetTestScreen();
+    return const WidgetDisplayScreen();
     // return AuthScreen();
   }
 }

@@ -1,8 +1,9 @@
-part of 'loaders.dart';
+part of '../components.dart';
 
 class EssentialOverlayLoader {
   static showLoader({
     OverlayLoaderTypes loaderType = OverlayLoaderTypes.circular,
+    ComponentStyles componentStyle = ComponentStyles.adaptive,
     Color? color,
   }) =>
       SmartDialog.showLoading(
@@ -10,6 +11,7 @@ class EssentialOverlayLoader {
         builder: (_) => OverlayLoaderWidget(
           loaderType: loaderType,
           color: color ?? StaticColors.basicWhite,
+          componentStyle: componentStyle,
         ),
       );
 
@@ -19,7 +21,12 @@ class EssentialOverlayLoader {
 class OverlayLoaderWidget extends StatefulWidget {
   final OverlayLoaderTypes loaderType;
   final Color? color;
-  const OverlayLoaderWidget({super.key, required this.loaderType, this.color});
+  final ComponentStyles componentStyle;
+  const OverlayLoaderWidget(
+      {super.key,
+      required this.loaderType,
+      this.color,
+      required this.componentStyle});
 
   @override
   State<OverlayLoaderWidget> createState() => _OverlayLoaderWidgetState();
@@ -62,6 +69,7 @@ class _OverlayLoaderWidgetState extends State<OverlayLoaderWidget>
         visible: widget.loaderType == OverlayLoaderTypes.circular,
         child: EssentialSpinner(
           color: widget.color,
+          componentStyle: widget.componentStyle,
         ),
       ),
       Visibility(

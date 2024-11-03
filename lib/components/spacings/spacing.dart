@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_essentials/constants/constants.dart';
+part of '../components.dart';
 
 class Spacing extends StatelessWidget {
   final Spacings size;
@@ -37,7 +36,7 @@ class Spacing extends StatelessWidget {
       case Spacings.xxLarge:
         return Sizes.spacingXXL;
       default:
-        throw Exception("Invalid type");
+        throw Exception("Invalid or unhandled type");
     }
   }
 }

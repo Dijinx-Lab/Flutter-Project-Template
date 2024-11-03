@@ -1,4 +1,4 @@
-part of 'selections.dart';
+part of '../components.dart';
 
 class EssentialCheckbox extends StatelessWidget {
   final bool value;
@@ -6,6 +6,7 @@ class EssentialCheckbox extends StatelessWidget {
   final String? label;
   final bool boldLabel;
   final Haptics? haptic;
+  final ComponentStyles componentStyle;
 
   const EssentialCheckbox({
     super.key,
@@ -14,6 +15,7 @@ class EssentialCheckbox extends StatelessWidget {
     this.label,
     this.boldLabel = false,
     this.haptic = Haptics.nudge,
+    this.componentStyle = ComponentStyles.adaptive,
   });
 
   @override
@@ -21,7 +23,7 @@ class EssentialCheckbox extends StatelessWidget {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, appState) {
         return GestureDetector(
-          onTap: () => onTap(!value),
+          onTap: () => _onTap(!value),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -35,14 +37,7 @@ class EssentialCheckbox extends StatelessWidget {
                     ),
                   ),
                 ),
-              Checkbox.adaptive(
-                value: value,
-                onChanged: (res) => onTap(res),
-                visualDensity: VisualDensity.compact,
-                activeColor: appState.colors.primaryColor,
-                checkColor: StaticColors.basicWhite,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
+              _buildComponent(appState, context),
             ],
           ),
         );
@@ -50,7 +45,45 @@ class EssentialCheckbox extends StatelessWidget {
     );
   }
 
-  onTap(bool? res) {
+  Widget _buildComponent(AppState state, BuildContext context) {
+    switch (componentStyle) {
+      case ComponentStyles.adaptive:
+        return Checkbox.adaptive(
+          value: value,
+          onChanged: (res) => _onTap(res),
+          visualDensity: VisualDensity.compact,
+          activeColor: state.colors.primaryColor,
+          checkColor: StaticColors.basicWhite,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        );
+      case ComponentStyles.material:
+        return _buildMaterialCheckbox(state);
+      case ComponentStyles.cupertino:
+        return _buildCupertinoCheckbox(state);
+    }
+  }
+
+  Widget _buildMaterialCheckbox(AppState state) {
+    return Checkbox(
+      value: value,
+      onChanged: (res) => _onTap(res),
+      visualDensity: VisualDensity.compact,
+      activeColor: state.colors.primaryColor,
+      checkColor: StaticColors.basicWhite,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );
+  }
+
+  Widget _buildCupertinoCheckbox(AppState state) {
+    return CupertinoCheckbox(
+      value: value,
+      onChanged: (res) => _onTap(res),
+      activeColor: state.colors.primaryColor,
+      checkColor: StaticColors.basicWhite,
+    );
+  }
+
+  _onTap(bool? res) {
     if (haptic != null) {
       HapticUtil.trigger(haptic!);
     }

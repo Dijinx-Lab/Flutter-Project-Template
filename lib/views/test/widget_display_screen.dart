@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_essentials/app/bloc/app_bloc.dart';
-import 'package:flutter_essentials/components/buttons/buttons.dart';
-import 'package:flutter_essentials/components/loaders/loaders.dart';
-import 'package:flutter_essentials/components/selections/selections.dart';
-import 'package:flutter_essentials/components/spacings/spacing.dart';
+import 'package:flutter_essentials/components/components.dart';
 import 'package:flutter_essentials/constants/constants.dart';
 import 'package:flutter_essentials/theme/theme.dart';
-import 'package:flutter_essentials/views/test/cubit/widget_test_cubit.dart';
+import 'package:flutter_essentials/views/test/cubit/widget_display_cubit.dart';
 
-class WidgetTestScreen extends StatelessWidget {
-  const WidgetTestScreen({super.key});
+class WidgetDisplayScreen extends StatelessWidget {
+  const WidgetDisplayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (appContext, appState) {
         return BlocProvider(
-          create: (context) => WidgetTestCubit(),
+          create: (context) => WidgetDisplayCubit(),
           child: Scaffold(
             body: SafeArea(
               child: Padding(
-                padding: Paddings.getHorizontalInsets(appContext),
+                padding: Paddings.horizontalScreenInsets(appContext),
                 child: SingleChildScrollView(
-                  child: BlocConsumer<WidgetTestCubit, WidgetTestState>(
+                  child: BlocConsumer<WidgetDisplayCubit, WidgetDisplayState>(
                     listener: (context, state) {},
                     builder: (context, state) {
-                      WidgetTestCubit cubit = context.read<WidgetTestCubit>();
+                      WidgetDisplayCubit cubit =
+                          context.read<WidgetDisplayCubit>();
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Spacing(Spacings.pageTop),
-                          _buildTheme(appState, context),
+                          _buildConfig(appState, context),
                           const Spacing(Spacings.medium),
                           _buildTexts(appState),
                           const Spacing(Spacings.medium),
@@ -57,7 +55,7 @@ class WidgetTestScreen extends StatelessWidget {
     );
   }
 
-  _buildSelections(AppState appState, WidgetTestCubit cubit) {
+  _buildSelections(AppState appState, WidgetDisplayCubit cubit) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -176,12 +174,12 @@ class WidgetTestScreen extends StatelessWidget {
     );
   }
 
-  _buildTheme(AppState appState, BuildContext context) {
+  _buildConfig(AppState appState, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'App Theme',
+          'App Settings',
           style: FontStyles.style(
             FontSizes.titleBold,
             textColor: appState.colors.primaryColor,

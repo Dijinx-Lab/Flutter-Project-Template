@@ -40,61 +40,6 @@ class AppThemes {
         selectionHandleColor: colors.primaryColor,
       ),
       scaffoldBackgroundColor: colors.background,
-      /*inputDecorationTheme: InputDecorationTheme(
-        fillColor: colors.inputBackground,
-        filled: true,
-        labelStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        floatingLabelStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        hintStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        helperStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        prefixStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        suffixStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        counterStyle: TextStyle(
-          color: colors.textSecondary,
-        ),
-        border: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.inputBorder),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.inputBorderFocused),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.inputBorder),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.inputBorderDisabled),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.errorBorder),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(Sizes.inputBorderRadius)),
-          borderSide: BorderSide(color: colors.errorBorder),
-        ),
-      ),*/
       useMaterial3: true,
     );
   }

@@ -1,15 +1,15 @@
-part of 'widget_test_cubit.dart';
+part of 'widget_display_cubit.dart';
 
-sealed class WidgetTestState extends Equatable {
-  const WidgetTestState();
+sealed class WidgetDisplayState extends Equatable {
+  const WidgetDisplayState();
 }
 
-final class WidgetTestLoaded extends WidgetTestState {
+final class WidgetDisplayLoaded extends WidgetDisplayState {
   final bool isSwitchOn;
   final bool isCheckboxOn;
   final String radioGroupValue;
   final double sliderValue;
-  const WidgetTestLoaded(
+  const WidgetDisplayLoaded(
       {required this.isSwitchOn,
       required this.isCheckboxOn,
       required this.radioGroupValue,

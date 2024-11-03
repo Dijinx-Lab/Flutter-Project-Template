@@ -25,24 +25,58 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       AppTheme theme = settings.theme;
       String locale = settings.locale;
 
+      if (state is AppInitial) {
+        await _onAppPrefsLoaded(emit, theme, locale, settings);
+      }
+
       if (event is AppThemeChangedEvent) {
         settings.theme = theme = event.theme;
         await _settingsRepo.saveAppSettings(settings);
+        emit(AppReady(
+          theme,
+          _getThemeColors(theme),
+          _getThemeData(theme),
+          locale,
+          appSettings: settings,
+        ));
       }
 
       if (event is AppLocaleChangedEvent) {
         settings.locale = locale = event.locale;
         await _settingsRepo.saveAppSettings(settings);
+        emit(AppReady(
+          theme,
+          _getThemeColors(theme),
+          _getThemeData(theme),
+          locale,
+          appSettings: settings,
+        ));
       }
-
-      emit(AppReady(
-        theme,
-        _getThemeColors(theme),
-        _getThemeData(theme),
-        locale,
-        appSettings: settings,
-      ));
     });
+  }
+
+  _onAppPrefsLoaded(
+    Emitter emit,
+    AppTheme theme,
+    String locale,
+    AppSettings settings,
+  ) async {
+    emit(AppLoaded(
+      theme,
+      _getThemeColors(theme),
+      _getThemeData(theme),
+      locale,
+      appSettings: settings,
+    ));
+    // PERFORM ANY INITIALIZING OPERATIONS LIKE API CALLS OR LOADING ASSETS ETC
+    await Future.delayed(const Duration(seconds: 2));
+    emit(AppReady(
+      theme,
+      _getThemeColors(theme),
+      _getThemeData(theme),
+      locale,
+      appSettings: settings,
+    ));
   }
 
   ThemeData _getThemeData(AppTheme theme) {

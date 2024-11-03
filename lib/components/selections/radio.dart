@@ -1,4 +1,4 @@
-part of 'selections.dart';
+part of '../components.dart';
 
 class EssentialRadio<T> extends StatelessWidget {
   final T value;
@@ -7,6 +7,7 @@ class EssentialRadio<T> extends StatelessWidget {
   final bool boldLabel;
   final bool showLabel;
   final Haptics? haptic;
+  final ComponentStyles componentStyle;
 
   const EssentialRadio({
     super.key,
@@ -16,30 +17,27 @@ class EssentialRadio<T> extends StatelessWidget {
     this.boldLabel = false,
     this.showLabel = true,
     this.haptic = Haptics.nudge,
+    this.componentStyle = ComponentStyles.adaptive,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, appState) {
+        bool addPadding = componentStyle == ComponentStyles.cupertino ||
+            (componentStyle == ComponentStyles.adaptive &&
+                Theme.of(context).platform == TargetPlatform.iOS);
+
         return GestureDetector(
-          onTap: () => onTap(value),
+          onTap: () => _onTap(value),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Radio<T>.adaptive(
-                value: value,
-                groupValue: groupValue,
-                visualDensity: VisualDensity.compact,
-                onChanged: (res) {
-                  if (res != null) onTap(res);
-                },
-                activeColor: appState.colors.primaryColor,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
+              _buildComponent(appState, context),
               if (showLabel)
                 Padding(
-                  padding: const EdgeInsets.only(left: Sizes.spacingM),
+                  padding:
+                      EdgeInsets.only(left: addPadding ? Sizes.spacingM : 0),
                   child: Text(
                     value.toString(),
                     style: FontStyles.style(
@@ -54,7 +52,51 @@ class EssentialRadio<T> extends StatelessWidget {
     );
   }
 
-  onTap(T res) {
+  Widget _buildComponent(AppState state, BuildContext context) {
+    switch (componentStyle) {
+      case ComponentStyles.adaptive:
+        return Radio<T>.adaptive(
+          value: value,
+          groupValue: groupValue,
+          visualDensity: VisualDensity.compact,
+          onChanged: (res) {
+            if (res != null) _onTap(res);
+          },
+          activeColor: state.colors.primaryColor,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        );
+      case ComponentStyles.material:
+        return _buildMaterialRadio(state);
+      case ComponentStyles.cupertino:
+        return _buildCupertinoRadio(state);
+    }
+  }
+
+  Widget _buildMaterialRadio(AppState state) {
+    return Radio<T>(
+      value: value,
+      groupValue: groupValue,
+      onChanged: (T? newValue) {
+        if (newValue != null) _onTap(newValue);
+      },
+      visualDensity: VisualDensity.compact,
+      activeColor: state.colors.primaryColor,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );
+  }
+
+  Widget _buildCupertinoRadio(AppState state) {
+    return CupertinoRadio<T>(
+      value: value,
+      groupValue: groupValue,
+      onChanged: (T? newValue) {
+        if (newValue != null) _onTap(newValue);
+      },
+      activeColor: state.colors.primaryColor,
+    );
+  }
+
+  _onTap(T res) {
     if (haptic != null) {
       HapticUtil.trigger(haptic!);
     }

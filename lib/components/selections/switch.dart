@@ -1,4 +1,4 @@
-part of 'selections.dart';
+part of '../components.dart';
 
 class EssentialSwitch extends StatelessWidget {
   final bool value;

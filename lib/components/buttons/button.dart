@@ -1,4 +1,4 @@
-part of 'buttons.dart';
+part of '../components.dart';
 
 class EssentialButton extends StatelessWidget {
   final String label;
@@ -8,6 +8,7 @@ class EssentialButton extends StatelessWidget {
   final bool isExpanded;
   final bool isEnabled;
   final Haptics? haptic;
+  final ComponentStyles componentStyle;
 
   const EssentialButton({
     super.key,
@@ -18,45 +19,58 @@ class EssentialButton extends StatelessWidget {
     this.isExpanded = true,
     this.isEnabled = true,
     this.haptic = Haptics.selection,
+    this.componentStyle = ComponentStyles.adaptive,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         return AbsorbPointer(
           absorbing: !isEnabled || isLoading,
           child: SizedBox(
-            height: Sizes.buttonHeight,
-            width: isExpanded ? double.maxFinite : null,
-            child: isCupertino
-                ? CupertinoButton(
-                    onPressed: () {
-                      if (!isLoading && !isLoading) onTap();
-                    },
-                    padding: _getPadding(),
-                    color: _getCupertinoBackgroundColor(state),
-                    pressedOpacity: 0.7,
-                    borderRadius:
-                        BorderRadius.circular(Sizes.buttonBorderRadius),
-                    child: _buildChild(state),
-                  )
-                : ElevatedButton(
-                    onPressed: () {
-                      if (!isLoading && !isLoading) {
-                        if (haptic != null) {
-                          HapticUtil.trigger(haptic!);
-                        }
-                        onTap();
-                      }
-                    },
-                    style: _getButtonStyle(state),
-                    child: _buildChild(state),
-                  ),
-          ),
+              height: Sizes.buttonHeight,
+              width: isExpanded ? double.maxFinite : null,
+              child: _buildComponent(state, context)),
         );
       },
+    );
+  }
+
+  Widget _buildComponent(AppState state, BuildContext context) {
+    switch (componentStyle) {
+      case ComponentStyles.adaptive:
+        {
+          final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
+          return isCupertino
+              ? _buildCupertinoButton(state)
+              : _buildMaterialButton(state);
+        }
+      case ComponentStyles.material:
+        return _buildMaterialButton(state);
+      case ComponentStyles.cupertino:
+        return _buildCupertinoButton(state);
+      default:
+        throw Exception("Invalid or unhandled type");
+    }
+  }
+
+  _buildCupertinoButton(AppState state) {
+    return CupertinoButton(
+      onPressed: () => _onTap(),
+      padding: _getPadding(),
+      color: _getCupertinoBackgroundColor(state),
+      pressedOpacity: 0.7,
+      borderRadius: BorderRadius.circular(Sizes.buttonBorderRadius),
+      child: _buildChild(state),
+    );
+  }
+
+  _buildMaterialButton(AppState state) {
+    return ElevatedButton(
+      onPressed: () => _onTap(),
+      style: _getButtonStyle(state),
+      child: _buildChild(state),
     );
   }
 
@@ -95,7 +109,7 @@ class EssentialButton extends StatelessWidget {
       case ButtonTypes.textOnly:
         return appState.colors.textButtonText;
       default:
-        throw Exception('Invalid type');
+        throw Exception('Invalid or unhandled type');
     }
   }
 
@@ -195,5 +209,14 @@ class EssentialButton extends StatelessWidget {
       backgroundColor = backgroundColor.withOpacity(0.6);
     }
     return backgroundColor;
+  }
+
+  _onTap() {
+    if (!isLoading && isEnabled) {
+      if (haptic != null) {
+        HapticUtil.trigger(haptic!);
+      }
+      onTap();
+    }
   }
 }

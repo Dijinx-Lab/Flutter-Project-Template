@@ -1,7 +1,7 @@
 part of 'theme.dart';
 
 class Paddings {
-  static EdgeInsets getHorizontalInsets(
+  static EdgeInsets horizontalScreenInsets(
     BuildContext context, {
     double top = 0,
     double bottom = 0,

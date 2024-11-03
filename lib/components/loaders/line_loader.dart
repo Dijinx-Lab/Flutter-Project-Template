@@ -1,4 +1,4 @@
-part of 'loaders.dart';
+part of '../components.dart';
 
 class EssentialLineLoader extends StatelessWidget {
   final Color? color;

@@ -10,7 +10,6 @@ void main() async {
   await TimeZoneUtil.initialize();
   await SharedPrefUtil().initialize();
   await LocalDbUtil.initialize();
-
   EasyLocalization.logger.enableBuildModes = [];
 
   runApp(

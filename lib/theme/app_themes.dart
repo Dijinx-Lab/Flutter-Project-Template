@@ -10,7 +10,7 @@ class AppThemes {
       _generateTheme(_darkColors, Brightness.dark);
 
   static ThemeData _generateTheme(
-    AppThemeColors colors,
+    AppColors colors,
     Brightness brightness,
   ) {
     return ThemeData(

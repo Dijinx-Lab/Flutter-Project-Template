@@ -1,10 +1,10 @@
 part of '../components.dart';
 
 class Spacing extends StatelessWidget {
-  final Spacings size;
+  final SpacingSize size;
 
-  const Spacing(
-    this.size, {
+  const Spacing({
+    this.size = SpacingSize.medium,
     super.key,
   });
 
@@ -19,21 +19,21 @@ class Spacing extends StatelessWidget {
 
   double _getSize() {
     switch (size) {
-      case Spacings.form:
+      case SpacingSize.form:
         return Sizes.spacingForms;
-      case Spacings.pageTop:
+      case SpacingSize.pageTop:
         return Sizes.spacingPageTop;
-      case Spacings.xSmall:
+      case SpacingSize.xSmall:
         return Sizes.spacingXS;
-      case Spacings.small:
+      case SpacingSize.small:
         return Sizes.spacingS;
-      case Spacings.medium:
+      case SpacingSize.medium:
         return Sizes.spacingM;
-      case Spacings.large:
+      case SpacingSize.large:
         return Sizes.spacingL;
-      case Spacings.xLarge:
+      case SpacingSize.xLarge:
         return Sizes.spacingXL;
-      case Spacings.xxLarge:
+      case SpacingSize.xxLarge:
         return Sizes.spacingXXL;
       default:
         throw Exception("Invalid or unhandled type");

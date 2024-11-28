@@ -2,15 +2,16 @@ part of '../components.dart';
 
 class EssentialOverlayLoader {
   static showLoader({
-    OverlayLoaderTypes loaderType = OverlayLoaderTypes.circular,
-    ComponentStyles componentStyle = ComponentStyles.adaptive,
+    OverlayLoaderType loaderType = OverlayLoaderType.circular,
+    ComponentStyle componentStyle = ComponentStyle.adaptive,
     Color? color,
   }) =>
       SmartDialog.showLoading(
         backType: SmartBackType.ignore,
+        maskColor: EssentialColors.slate900.withOpacity(0.6),
         builder: (_) => OverlayLoaderWidget(
           loaderType: loaderType,
-          color: color ?? StaticColors.basicWhite,
+          color: color,
           componentStyle: componentStyle,
         ),
       );
@@ -19,14 +20,15 @@ class EssentialOverlayLoader {
 }
 
 class OverlayLoaderWidget extends StatefulWidget {
-  final OverlayLoaderTypes loaderType;
+  final OverlayLoaderType loaderType;
   final Color? color;
-  final ComponentStyles componentStyle;
-  const OverlayLoaderWidget(
-      {super.key,
-      required this.loaderType,
-      this.color,
-      required this.componentStyle});
+  final ComponentStyle componentStyle;
+  const OverlayLoaderWidget({
+    super.key,
+    required this.loaderType,
+    this.color,
+    required this.componentStyle,
+  });
 
   @override
   State<OverlayLoaderWidget> createState() => _OverlayLoaderWidgetState();
@@ -64,20 +66,31 @@ class _OverlayLoaderWidgetState extends State<OverlayLoaderWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Visibility(
-        visible: widget.loaderType == OverlayLoaderTypes.circular,
-        child: EssentialSpinner(
-          color: widget.color,
-          componentStyle: widget.componentStyle,
-        ),
-      ),
-      Visibility(
-        visible: widget.loaderType == OverlayLoaderTypes.line,
-        child: EssentialLineLoader(
-          color: widget.color,
-        ),
-      ),
-    ]);
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, appState) {
+        var loaderColor = widget.color ?? EssentialColors.slate50;
+        return Stack(
+          children: [
+            Visibility(
+              visible: widget.loaderType == OverlayLoaderType.circular,
+              child: EssentialSpinner(
+                color: loaderColor,
+                componentStyle: widget.componentStyle,
+              ),
+            ),
+            Visibility(
+              visible: widget.loaderType == OverlayLoaderType.line,
+              child: Padding(
+                padding: Paddings.horizontalScreenInsets(context),
+                child: EssentialLineLoader(
+                  color: loaderColor,
+                  backgroundColor: EssentialColors.slate400,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

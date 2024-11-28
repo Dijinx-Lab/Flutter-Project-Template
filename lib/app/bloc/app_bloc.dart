@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/constants/routes.dart';
 import 'package:flutter_essentials/models/models.dart';
 import 'package:flutter_essentials/repositories/repositories.dart';
 import 'package:flutter_essentials/theme/theme.dart';
@@ -38,6 +39,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           _getThemeData(theme),
           locale,
           appSettings: settings,
+          nextRoute: null,
         ));
       }
 
@@ -50,6 +52,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           _getThemeData(theme),
           locale,
           appSettings: settings,
+          nextRoute: null,
         ));
       }
     });
@@ -76,6 +79,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       _getThemeData(theme),
       locale,
       appSettings: settings,
+      nextRoute: Routes.display,
     ));
   }
 
@@ -83,7 +87,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     return theme == AppTheme.dark ? AppThemes.darkTheme : AppThemes.lightTheme;
   }
 
-  AppThemeColors _getThemeColors(AppTheme theme) {
+  AppColors _getThemeColors(AppTheme theme) {
     return theme == AppTheme.dark ? DarkColors() : LightColors();
   }
 

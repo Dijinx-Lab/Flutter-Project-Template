@@ -2,11 +2,11 @@ part of '../components.dart';
 
 class EssentialSpinner extends StatelessWidget {
   final Color? color;
-  final ComponentStyles componentStyle;
+  final ComponentStyle componentStyle;
   const EssentialSpinner({
     super.key,
     this.color,
-    this.componentStyle = ComponentStyles.adaptive,
+    this.componentStyle = ComponentStyle.adaptive,
   });
 
   @override
@@ -26,25 +26,25 @@ class EssentialSpinner extends StatelessWidget {
   Widget _buildComponent(AppState state, BuildContext context) {
     final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
     Color? spinnerColor = color;
-    spinnerColor ??= state.colors.textSecondary;
+    spinnerColor ??= state.colors.loader;
     switch (componentStyle) {
-      case ComponentStyles.adaptive:
+      case ComponentStyle.adaptive:
         return isCupertino
             ? CupertinoActivityIndicator(
-                radius: 15,
+                radius: 10,
                 color: spinnerColor,
               )
             : CircularProgressIndicator(
                 color: spinnerColor,
               );
 
-      case ComponentStyles.material:
+      case ComponentStyle.material:
         return CircularProgressIndicator(
           color: spinnerColor,
         );
-      case ComponentStyles.cupertino:
+      case ComponentStyle.cupertino:
         return CupertinoActivityIndicator(
-          radius: 15,
+          radius: 10,
           color: spinnerColor,
         );
     }

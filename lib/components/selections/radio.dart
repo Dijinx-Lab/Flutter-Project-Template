@@ -7,7 +7,7 @@ class EssentialRadio<T> extends StatelessWidget {
   final bool boldLabel;
   final bool showLabel;
   final Haptics? haptic;
-  final ComponentStyles componentStyle;
+  final ComponentStyle componentStyle;
 
   const EssentialRadio({
     super.key,
@@ -17,15 +17,15 @@ class EssentialRadio<T> extends StatelessWidget {
     this.boldLabel = false,
     this.showLabel = true,
     this.haptic = Haptics.nudge,
-    this.componentStyle = ComponentStyles.adaptive,
+    this.componentStyle = ComponentStyle.adaptive,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, appState) {
-        bool addPadding = componentStyle == ComponentStyles.cupertino ||
-            (componentStyle == ComponentStyles.adaptive &&
+        bool addPadding = componentStyle == ComponentStyle.cupertino ||
+            (componentStyle == ComponentStyle.adaptive &&
                 Theme.of(context).platform == TargetPlatform.iOS);
 
         return GestureDetector(
@@ -41,7 +41,7 @@ class EssentialRadio<T> extends StatelessWidget {
                   child: Text(
                     value.toString(),
                     style: FontStyles.style(
-                      boldLabel ? FontSizes.labelBold : FontSizes.label,
+                      boldLabel ? FontSize.labelBold : FontSize.label,
                     ),
                   ),
                 ),
@@ -54,7 +54,7 @@ class EssentialRadio<T> extends StatelessWidget {
 
   Widget _buildComponent(AppState state, BuildContext context) {
     switch (componentStyle) {
-      case ComponentStyles.adaptive:
+      case ComponentStyle.adaptive:
         return Radio<T>.adaptive(
           value: value,
           groupValue: groupValue,
@@ -65,9 +65,9 @@ class EssentialRadio<T> extends StatelessWidget {
           activeColor: state.colors.primaryColor,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         );
-      case ComponentStyles.material:
+      case ComponentStyle.material:
         return _buildMaterialRadio(state);
-      case ComponentStyles.cupertino:
+      case ComponentStyle.cupertino:
         return _buildCupertinoRadio(state);
     }
   }

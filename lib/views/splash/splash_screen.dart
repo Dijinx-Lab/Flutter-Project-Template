@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_essentials/app/bloc/app_bloc.dart';
 import 'package:flutter_essentials/constants/constants.dart';
+import 'package:flutter_essentials/constants/routes.dart';
 import 'package:flutter_essentials/theme/theme.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,10 +10,15 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
+    return BlocConsumer<AppBloc, AppState>(
+      listener: (context, state) {
+        if (state is AppReady) {
+          Navigator.of(context).pushReplacementNamed(Routes.display);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: state.colors.surfacePrimary,
+          backgroundColor: state.colors.background,
           body: Center(
             child: Padding(
               padding: Paddings.horizontalScreenInsets(context),
@@ -20,7 +26,7 @@ class SplashScreen extends StatelessWidget {
                 width: Sizes.logoWH.$1,
                 height: Sizes.logoWH.$2,
                 decoration: BoxDecoration(
-                  boxShadow: [Shadows.style()],
+                  boxShadow: Shadows.style(),
                 ),
                 child: Image.asset(
                   Assets.logo,

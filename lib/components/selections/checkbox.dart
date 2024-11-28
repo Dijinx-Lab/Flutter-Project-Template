@@ -6,7 +6,7 @@ class EssentialCheckbox extends StatelessWidget {
   final String? label;
   final bool boldLabel;
   final Haptics? haptic;
-  final ComponentStyles componentStyle;
+  final ComponentStyle componentStyle;
 
   const EssentialCheckbox({
     super.key,
@@ -15,7 +15,7 @@ class EssentialCheckbox extends StatelessWidget {
     this.label,
     this.boldLabel = false,
     this.haptic = Haptics.nudge,
-    this.componentStyle = ComponentStyles.adaptive,
+    this.componentStyle = ComponentStyle.adaptive,
   });
 
   @override
@@ -33,7 +33,7 @@ class EssentialCheckbox extends StatelessWidget {
                   child: Text(
                     label ?? "",
                     style: FontStyles.style(
-                      boldLabel ? FontSizes.labelBold : FontSizes.label,
+                      boldLabel ? FontSize.labelBold : FontSize.label,
                     ),
                   ),
                 ),
@@ -47,18 +47,18 @@ class EssentialCheckbox extends StatelessWidget {
 
   Widget _buildComponent(AppState state, BuildContext context) {
     switch (componentStyle) {
-      case ComponentStyles.adaptive:
+      case ComponentStyle.adaptive:
         return Checkbox.adaptive(
           value: value,
           onChanged: (res) => _onTap(res),
           visualDensity: VisualDensity.compact,
           activeColor: state.colors.primaryColor,
-          checkColor: StaticColors.basicWhite,
+          checkColor: EssentialColors.white,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         );
-      case ComponentStyles.material:
+      case ComponentStyle.material:
         return _buildMaterialCheckbox(state);
-      case ComponentStyles.cupertino:
+      case ComponentStyle.cupertino:
         return _buildCupertinoCheckbox(state);
     }
   }
@@ -69,7 +69,7 @@ class EssentialCheckbox extends StatelessWidget {
       onChanged: (res) => _onTap(res),
       visualDensity: VisualDensity.compact,
       activeColor: state.colors.primaryColor,
-      checkColor: StaticColors.basicWhite,
+      checkColor: EssentialColors.white,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
   }
@@ -79,7 +79,7 @@ class EssentialCheckbox extends StatelessWidget {
       value: value,
       onChanged: (res) => _onTap(res),
       activeColor: state.colors.primaryColor,
-      checkColor: StaticColors.basicWhite,
+      checkColor: EssentialColors.white,
     );
   }
 

@@ -3,23 +3,23 @@ part of '../components.dart';
 class EssentialButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
-  final ButtonTypes type;
+  final ButtonType type;
   final bool isLoading;
   final bool isExpanded;
   final bool isEnabled;
   final Haptics? haptic;
-  final ComponentStyles componentStyle;
+  final ComponentStyle componentStyle;
 
   const EssentialButton({
     super.key,
     required this.label,
     required this.onTap,
-    this.type = ButtonTypes.primary,
+    this.type = ButtonType.primary,
     this.isLoading = false,
     this.isExpanded = true,
     this.isEnabled = true,
     this.haptic = Haptics.selection,
-    this.componentStyle = ComponentStyles.adaptive,
+    this.componentStyle = ComponentStyle.adaptive,
   });
 
   @override
@@ -39,16 +39,16 @@ class EssentialButton extends StatelessWidget {
 
   Widget _buildComponent(AppState state, BuildContext context) {
     switch (componentStyle) {
-      case ComponentStyles.adaptive:
+      case ComponentStyle.adaptive:
         {
           final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
           return isCupertino
               ? _buildCupertinoButton(state)
               : _buildMaterialButton(state);
         }
-      case ComponentStyles.material:
+      case ComponentStyle.material:
         return _buildMaterialButton(state);
-      case ComponentStyles.cupertino:
+      case ComponentStyle.cupertino:
         return _buildCupertinoButton(state);
       default:
         throw Exception("Invalid or unhandled type");
@@ -79,6 +79,7 @@ class EssentialButton extends StatelessWidget {
       fit: BoxFit.fitWidth,
       child: isLoading
           ? EssentialSpinner(
+              componentStyle: componentStyle,
               color: _getTextColor(state).withOpacity(isEnabled ? 1 : 0.8),
             )
           : Text(
@@ -87,7 +88,7 @@ class EssentialButton extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: FontStyles.style(
-                FontSizes.bodyBold,
+                FontSize.bodyBold,
                 textColor:
                     _getTextColor(state).withOpacity(isEnabled ? 1 : 0.8),
               ),
@@ -97,16 +98,16 @@ class EssentialButton extends StatelessWidget {
 
   Color _getTextColor(AppState appState) {
     switch (type) {
-      case ButtonTypes.primary:
+      case ButtonType.primary:
         return appState.colors.primaryButtonText;
 
-      case ButtonTypes.secondary:
+      case ButtonType.secondary:
         return appState.colors.secondaryButtonText;
 
-      case ButtonTypes.danger:
+      case ButtonType.danger:
         return appState.colors.dangerButtonText;
 
-      case ButtonTypes.textOnly:
+      case ButtonType.textOnly:
         return appState.colors.textButtonText;
       default:
         throw Exception('Invalid or unhandled type');
@@ -119,27 +120,27 @@ class EssentialButton extends StatelessWidget {
     Color borderColor;
 
     switch (type) {
-      case ButtonTypes.primary:
+      case ButtonType.primary:
         backgroundColor = appState.colors.primaryButton;
-        overlayColor = appState.colors.primaryButtonWater;
+        overlayColor = appState.colors.primaryButtonText.withOpacity(0.3);
         borderColor = appState.colors.primaryButtonBorder;
         break;
 
-      case ButtonTypes.secondary:
+      case ButtonType.secondary:
         backgroundColor = appState.colors.secondaryButton;
-        overlayColor = appState.colors.secondaryButtonWater;
+        overlayColor = appState.colors.secondaryButtonText.withOpacity(0.3);
         borderColor = appState.colors.secondaryButtonBorder;
         break;
 
-      case ButtonTypes.danger:
+      case ButtonType.danger:
         backgroundColor = appState.colors.dangerButton;
-        overlayColor = appState.colors.dangerButtonWater;
+        overlayColor = appState.colors.dangerButtonText.withOpacity(0.3);
         borderColor = appState.colors.dangerButtonBorder;
         break;
 
-      case ButtonTypes.textOnly:
+      case ButtonType.textOnly:
         backgroundColor = appState.colors.textButton;
-        overlayColor = appState.colors.textButtonWater;
+        overlayColor = appState.colors.textButtonText.withOpacity(0.3);
         borderColor = appState.colors.textButtonBorder;
         break;
     }
@@ -157,7 +158,7 @@ class EssentialButton extends StatelessWidget {
       ),
       elevation: WidgetStateProperty.resolveWith<double>(
         (Set<WidgetState> states) {
-          if (!isEnabled || type == ButtonTypes.textOnly) {
+          if (!isEnabled || type == ButtonType.textOnly) {
             return 0;
           }
           return Sizes.buttonElevation;
@@ -187,20 +188,20 @@ class EssentialButton extends StatelessWidget {
   Color _getCupertinoBackgroundColor(AppState appState) {
     Color backgroundColor;
     switch (type) {
-      case ButtonTypes.primary:
+      case ButtonType.primary:
         backgroundColor = appState.colors.primaryButton;
         break;
 
-      case ButtonTypes.secondary:
+      case ButtonType.secondary:
         backgroundColor =
             appState.colors.secondaryButtonBorder.withOpacity(0.2);
         break;
 
-      case ButtonTypes.danger:
+      case ButtonType.danger:
         backgroundColor = appState.colors.dangerButton;
         break;
 
-      case ButtonTypes.textOnly:
+      case ButtonType.textOnly:
         backgroundColor = appState.colors.textButton;
         break;
     }

@@ -5,19 +5,19 @@ enum AppTheme {
   dark,
 }
 
-enum ButtonTypes {
+enum ButtonType {
   primary,
   secondary,
   danger,
   textOnly,
 }
 
-enum OverlayLoaderTypes {
+enum OverlayLoaderType {
   circular,
   line,
 }
 
-enum Spacings {
+enum SpacingSize {
   form,
   pageTop,
   xSmall,
@@ -28,7 +28,7 @@ enum Spacings {
   xxLarge,
 }
 
-enum FontSizes {
+enum FontSize {
   title,
   titleBold,
   heading,
@@ -41,12 +41,17 @@ enum FontSizes {
   labelBold,
 }
 
-enum ComponentStyles {
+enum ComponentStyle {
   adaptive,
   material,
   cupertino,
 }
 
-enum ShadowStyles {
-  card,
+enum Shadow {
+  xSmall,
+  small,
+  medium,
+  large,
+  xLarge,
+  xxLarge,
 }

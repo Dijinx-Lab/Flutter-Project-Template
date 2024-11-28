@@ -31,7 +31,7 @@ class EssentialSwitch extends StatelessWidget {
                   child: Text(
                     label ?? "",
                     style: FontStyles.style(
-                      boldLabel ? FontSizes.labelBold : FontSizes.label,
+                      boldLabel ? FontSize.labelBold : FontSize.label,
                     ),
                   ),
                 ),
@@ -40,7 +40,7 @@ class EssentialSwitch extends StatelessWidget {
                 onChanged: (res) => onTap(res),
                 activeColor: appState.colors.primaryColor,
                 activeTrackColor: appState.colors.primaryColor,
-                inactiveThumbColor: StaticColors.slate600,
+                inactiveThumbColor: EssentialColors.slate600,
               ),
             ],
           ),

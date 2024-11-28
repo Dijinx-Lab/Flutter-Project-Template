@@ -9,7 +9,7 @@ sealed class AppState extends Equatable {
   );
 
   final AppTheme theme;
-  final AppThemeColors colors;
+  final AppColors colors;
   final ThemeData themeData;
   final String locale;
 }
@@ -51,9 +51,11 @@ final class AppReady extends AppState {
     super.themeData,
     super.locale, {
     required this.appSettings,
+    required this.nextRoute,
   });
 
   final AppSettings appSettings;
+  final String? nextRoute;
 
   @override
   List<Object?> get props => [theme, locale, appSettings];

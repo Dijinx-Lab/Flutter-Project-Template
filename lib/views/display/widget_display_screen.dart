@@ -4,7 +4,7 @@ import 'package:flutter_essentials/app/bloc/app_bloc.dart';
 import 'package:flutter_essentials/components/components.dart';
 import 'package:flutter_essentials/constants/constants.dart';
 import 'package:flutter_essentials/theme/theme.dart';
-import 'package:flutter_essentials/views/test/cubit/widget_display_cubit.dart';
+import 'package:flutter_essentials/views/display/cubit/widget_display_cubit.dart';
 
 class WidgetDisplayScreen extends StatelessWidget {
   const WidgetDisplayScreen({super.key});
@@ -28,20 +28,17 @@ class WidgetDisplayScreen extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Spacing(Spacings.pageTop),
+                          const Spacing(size: SpacingSize.pageTop),
                           _buildConfig(appState, context),
-                          const Spacing(Spacings.medium),
+                          const Spacing(),
                           _buildTexts(appState),
-                          const Spacing(Spacings.medium),
+                          const Spacing(),
                           _buildButtons(appState),
-                          const Spacing(Spacings.medium),
+                          const Spacing(),
                           _buildLoaders(appState),
-                          const Spacing(Spacings.medium),
+                          const Spacing(),
                           _buildSelections(appState, cubit),
-                          const Spacing(Spacings.xxLarge),
-                          const Spacing(Spacings.xxLarge),
-                          const Spacing(Spacings.xxLarge),
-                          const Spacing(Spacings.xxLarge),
+                          const Spacing(size: SpacingSize.xxLarge),
                         ],
                       );
                     },
@@ -62,23 +59,23 @@ class WidgetDisplayScreen extends StatelessWidget {
         Text(
           'Selections',
           style: FontStyles.style(
-            FontSizes.titleBold,
+            FontSize.titleBold,
             textColor: appState.colors.primaryColor,
           ),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialSwitch(
           label: 'Adaptive Switch',
           value: cubit.state.props[0] as bool,
           onChange: (res) => cubit.updateSwitch(res),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialCheckbox(
           label: 'Adaptive Checkbox',
           value: cubit.state.props[1] as bool,
           onChange: (res) => cubit.updateCheckbox(res),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         Row(
           children: [
             EssentialRadio<String>(
@@ -86,13 +83,13 @@ class WidgetDisplayScreen extends StatelessWidget {
               value: 'Yes',
               onChange: (res) => cubit.updateRadio(res),
             ),
-            const Spacing(Spacings.medium),
+            const Spacing(),
             EssentialRadio<String>(
               groupValue: cubit.state.props[2] as String,
               value: 'No',
               onChange: (res) => cubit.updateRadio(res),
             ),
-            const Spacing(Spacings.medium),
+            const Spacing(),
             EssentialRadio<String>(
               groupValue: cubit.state.props[2] as String,
               value: 'Maybe',
@@ -100,7 +97,7 @@ class WidgetDisplayScreen extends StatelessWidget {
             ),
           ],
         ),
-        const Spacing(Spacings.large),
+        const Spacing(size: SpacingSize.large),
         EssentialSlider(
           value: cubit.state.props[3] as double,
           min: 0,
@@ -119,11 +116,11 @@ class WidgetDisplayScreen extends StatelessWidget {
         Text(
           'Loadings',
           style: FontStyles.style(
-            FontSizes.titleBold,
+            FontSize.titleBold,
             textColor: appState.colors.primaryColor,
           ),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         Row(
           children: [
             EssentialSkeleton.circle(radius: 30),
@@ -135,17 +132,17 @@ class WidgetDisplayScreen extends StatelessWidget {
             width: double.maxFinite,
             height: 100,
             margin: const EdgeInsets.only(top: Sizes.spacingM)),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         const SizedBox(
             width: Sizes.spacingXXL,
             height: Sizes.spacingXXL,
             child: EssentialSpinner()),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         const SizedBox(
             width: double.maxFinite,
             height: Sizes.spacingXXL,
             child: EssentialLineLoader()),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         Row(
           children: [
             EssentialButton(
@@ -157,12 +154,12 @@ class WidgetDisplayScreen extends StatelessWidget {
               },
               isExpanded: false,
             ),
-            const Spacing(Spacings.medium),
+            const Spacing(),
             EssentialButton(
               label: 'Line Overlay',
               onTap: () async {
                 EssentialOverlayLoader.showLoader(
-                    loaderType: OverlayLoaderTypes.line);
+                    loaderType: OverlayLoaderType.line);
                 await Future.delayed(const Duration(seconds: 3));
                 EssentialOverlayLoader.dismiss();
               },
@@ -181,11 +178,11 @@ class WidgetDisplayScreen extends StatelessWidget {
         Text(
           'App Settings',
           style: FontStyles.style(
-            FontSizes.titleBold,
+            FontSize.titleBold,
             textColor: appState.colors.primaryColor,
           ),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialSwitch(
           label: 'Dark Mode',
           value: appState.themeData.brightness == Brightness.dark,
@@ -206,50 +203,50 @@ class WidgetDisplayScreen extends StatelessWidget {
         Text(
           'Buttons',
           style: FontStyles.style(
-            FontSizes.titleBold,
+            FontSize.titleBold,
             textColor: appState.colors.primaryColor,
           ),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Primary Button',
           onTap: () => (),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Disabled Primary Button',
           onTap: () => (),
           isEnabled: false,
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Expanded = false',
           onTap: () => (),
           isExpanded: false,
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Primary Button',
           onTap: () => (),
           isLoading: true,
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Secondary Button',
           onTap: () => (),
-          type: ButtonTypes.secondary,
+          type: ButtonType.secondary,
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Danger Button',
           onTap: () => (),
-          type: ButtonTypes.danger,
+          type: ButtonType.danger,
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         EssentialButton(
           label: 'Text Only',
           onTap: () => (),
-          type: ButtonTypes.textOnly,
+          type: ButtonType.textOnly,
           isExpanded: false,
         ),
       ],
@@ -263,115 +260,115 @@ class WidgetDisplayScreen extends StatelessWidget {
         Text(
           'Text Styles',
           style: FontStyles.style(
-            FontSizes.titleBold,
+            FontSize.titleBold,
             textColor: appState.colors.primaryColor,
           ),
         ),
-        const Spacing(Spacings.medium),
+        const Spacing(),
         Row(
           children: [
             Expanded(
               child: Text(
                 'Title',
                 style: FontStyles.style(
-                  FontSizes.title,
+                  FontSize.title,
                 ),
               ),
             ),
-            const Spacing(Spacings.xSmall),
+            const Spacing(size: SpacingSize.xSmall),
             Expanded(
               child: Text(
                 'Title Bold',
                 style: FontStyles.style(
-                  FontSizes.titleBold,
+                  FontSize.titleBold,
                 ),
               ),
             ),
           ],
         ),
-        const Spacing(Spacings.xSmall),
+        const Spacing(size: SpacingSize.xSmall),
         Row(
           children: [
             Expanded(
               child: Text(
                 'Heading',
                 style: FontStyles.style(
-                  FontSizes.heading,
+                  FontSize.heading,
                 ),
               ),
             ),
-            const Spacing(Spacings.xSmall),
+            const Spacing(size: SpacingSize.xSmall),
             Expanded(
               child: Text(
                 'Heading Bold',
                 style: FontStyles.style(
-                  FontSizes.headingBold,
+                  FontSize.headingBold,
                 ),
               ),
             ),
           ],
         ),
-        const Spacing(Spacings.xSmall),
+        const Spacing(size: SpacingSize.xSmall),
         Row(
           children: [
             Expanded(
               child: Text(
                 'Body Large',
                 style: FontStyles.style(
-                  FontSizes.bodyLarge,
+                  FontSize.bodyLarge,
                 ),
               ),
             ),
-            const Spacing(Spacings.xSmall),
+            const Spacing(size: SpacingSize.xSmall),
             Expanded(
               child: Text(
                 'Body Large Bold',
                 style: FontStyles.style(
-                  FontSizes.bodyLargeBold,
+                  FontSize.bodyLargeBold,
                 ),
               ),
             ),
           ],
         ),
-        const Spacing(Spacings.xSmall),
+        const Spacing(size: SpacingSize.xSmall),
         Row(
           children: [
             Expanded(
               child: Text(
                 'Body',
                 style: FontStyles.style(
-                  FontSizes.body,
+                  FontSize.body,
                 ),
               ),
             ),
-            const Spacing(Spacings.xSmall),
+            const Spacing(size: SpacingSize.xSmall),
             Expanded(
               child: Text(
                 'Body Bold',
                 style: FontStyles.style(
-                  FontSizes.bodyBold,
+                  FontSize.bodyBold,
                 ),
               ),
             ),
           ],
         ),
-        const Spacing(Spacings.xSmall),
+        const Spacing(size: SpacingSize.xSmall),
         Row(
           children: [
             Expanded(
               child: Text(
                 'Label',
                 style: FontStyles.style(
-                  FontSizes.label,
+                  FontSize.label,
                 ),
               ),
             ),
-            const Spacing(Spacings.xSmall),
+            const Spacing(size: SpacingSize.xSmall),
             Expanded(
               child: Text(
                 'Label Bold',
                 style: FontStyles.style(
-                  FontSizes.labelBold,
+                  FontSize.labelBold,
                 ),
               ),
             ),

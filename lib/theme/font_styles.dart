@@ -1,7 +1,7 @@
 part of 'theme.dart';
 
 class FontStyles {
-  static TextStyle style(FontSizes size, {Color? textColor}) {
+  static TextStyle style(FontSize size, {Color? textColor}) {
     var sizes = _getFontSize(size);
     return TextStyle(
       fontSize: sizes.$1,
@@ -10,27 +10,27 @@ class FontStyles {
     );
   }
 
-  static (double, FontWeight) _getFontSize(FontSizes size) {
+  static (double, FontWeight) _getFontSize(FontSize size) {
     switch (size) {
-      case FontSizes.title:
+      case FontSize.title:
         return (Sizes.fontSizeXXL, FontWeight.w400);
-      case FontSizes.titleBold:
+      case FontSize.titleBold:
         return (Sizes.fontSizeXXL, FontWeight.w600);
-      case FontSizes.heading:
+      case FontSize.heading:
         return (Sizes.fontSizeXL, FontWeight.w400);
-      case FontSizes.headingBold:
+      case FontSize.headingBold:
         return (Sizes.fontSizeXL, FontWeight.w600);
-      case FontSizes.bodyLarge:
+      case FontSize.bodyLarge:
         return (Sizes.fontSizeL, FontWeight.w400);
-      case FontSizes.bodyLargeBold:
+      case FontSize.bodyLargeBold:
         return (Sizes.fontSizeL, FontWeight.w600);
-      case FontSizes.body:
+      case FontSize.body:
         return (Sizes.fontSizeM, FontWeight.w400);
-      case FontSizes.bodyBold:
+      case FontSize.bodyBold:
         return (Sizes.fontSizeM, FontWeight.w600);
-      case FontSizes.label:
+      case FontSize.label:
         return (Sizes.fontSizeS, FontWeight.w400);
-      case FontSizes.labelBold:
+      case FontSize.labelBold:
         return (Sizes.fontSizeS, FontWeight.w600);
       default:
         throw ("Invalid or unhandled type");

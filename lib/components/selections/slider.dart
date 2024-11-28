@@ -39,7 +39,7 @@ class EssentialSlider extends StatelessWidget {
                   child: Text(
                     label ?? "",
                     style: FontStyles.style(
-                      boldLabel ? FontSizes.labelBold : FontSizes.label,
+                      boldLabel ? FontSize.labelBold : FontSize.label,
                     ),
                   ),
                 ),

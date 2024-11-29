@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_essentials/constants/constants.dart';
-import 'package:sqflite/sqflite.dart';
 
 part 'app_themes.dart';
 

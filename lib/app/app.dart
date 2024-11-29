@@ -6,7 +6,6 @@ import 'package:flutter_essentials/routes/routes.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_essentials/app/bloc/app_bloc.dart';
 import 'package:flutter_essentials/constants/constants.dart';
-import 'package:flutter_essentials/views/splash/splash_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

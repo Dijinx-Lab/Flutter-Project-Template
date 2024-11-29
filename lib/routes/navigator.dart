@@ -5,7 +5,7 @@ class EssentialNavigator {
   static const List<String> upTransitionRoutes = [];
 
   static Route<dynamic> routeTable(RouteSettings settings) {
-    Widget page = routeNameMapper(settings.name ?? "");
+    Widget page = _routeNameMapper(settings.name ?? "");
 
     if (upTransitionRoutes.contains(settings.name)) {
       return RouteTransitions.up(page, settings);
@@ -14,7 +14,7 @@ class EssentialNavigator {
     return MaterialPageRoute<dynamic>(settings: settings, builder: (_) => page);
   }
 
-  static Widget routeNameMapper(String route) {
+  static Widget _routeNameMapper(String route) {
     switch (route) {
       case Routes.splash:
         return const SplashScreen();
